@@ -134,7 +134,7 @@ async function _html(req, res) {
     );
     if (wildcard) {
       const regex = new RegExp(wildcard.replace(/\*/g, '.*'));
-      jobs = jobs.filter((job) => regex.test(job.id));
+      jobs = jobs.filter((job) => regex.test(_.get(job, 'id')));
     }
   }
 
@@ -191,6 +191,7 @@ async function _html(req, res) {
     lastPage: _.last(pages),
     order,
     totalJobs: _.size(jobs),
+    wildcard,
   });
 }
 
